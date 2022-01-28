@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Mon Jan 24 08:33:06 2022
+# Process ID: 7540
+# Current directory: C:/Users/Julien/AppData/Roaming/Xilinx/Vivado
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9220
+# Log file: C:/Users/Julien/AppData/Roaming/Xilinx/Vivado/vivado.log
+# Journal file: C:/Users/Julien/AppData/Roaming/Xilinx/Vivado\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Julien/Documents/vivado/pb_logique_seq/pb_logique_seq.xpr
+update_compile_order -fileset sources_1
+archive_project C:/Users/Julien/Documents/vivado/pb_logique_seq.xpr.zip -temp_dir C:/Users/Julien/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-7540-DESKTOP-7O8NHLB -force -exclude_run_results -include_config_settings
