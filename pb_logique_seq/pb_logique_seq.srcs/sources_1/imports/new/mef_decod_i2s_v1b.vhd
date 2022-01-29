@@ -51,126 +51,117 @@ end mef_decod_i2s_v1b;
 
 architecture Behavioral of mef_decod_i2s_v1b is
 
-    type decod_I2S_etats is (
-         sta_init,
-         sta_enrGauche,
-         sta_enrDroite,
-         sta_transGauche,
-         sta_transDroite,
-         sta_transTout
-         );
-    signal fsm_EtatCourant, fsm_prochainEtat : decod_I2S_etats;
-    signal   d_reclrc_prec  : std_logic ;  --
+type mesEtat is (
+init,
+gauche,
+transmissionG,
+droite,
+transmissionD,
+transmissionFin
+);
+
+   signal EtatCourant: mesEtat; 
+    signal prochainEtat : mesEtat;
     
 begin
 
-    -- Assignation du prochain état
-    process(i_bclk, i_reset)
+process(i_bclk, i_reset)
     begin
        if (i_reset ='1') then
-             fsm_EtatCourant <= sta_init;
+             EtatCourant <= init;
        else
        if rising_edge(i_bclk) then
-             fsm_EtatCourant <= fsm_prochainEtat;
+             EtatCourant <= prochainEtat;
        end if;
        end if;
     end process;
-    
-    transitions: process(i_lrc , fsm_EtatCourant, i_cpt_bits)
+
+process(EtatCourant,i_lrc,i_cpt_bits)
 begin
-   case fsm_EtatCourant is
-        when sta_init =>
-            if(i_lrc = '0') then 
-                fsm_prochainEtat <= sta_enrGauche;
-            else
-                fsm_prochainEtat <= sta_init;
-            end if;
-            
-         when sta_enrGauche =>
-             if(i_cpt_bits = "0010111") then
-                fsm_prochainEtat <= sta_transGauche;
-             else
-                fsm_prochainEtat <= sta_enrGauche;
-             end if;
-             
-         when sta_transGauche =>
-            if(i_lrc = '1') then 
-            fsm_prochainEtat <= sta_enrDroite;
-            else
-            fsm_prochainEtat <= sta_transGauche;
-            end if;
-            
-         when sta_enrDroite =>
-             if(i_cpt_bits = "0010111") then
-                fsm_prochainEtat <= sta_transDroite;
-             else
-                fsm_prochainEtat <= sta_enrDroite;
-             end if;
-             
-        when sta_transDroite =>
-            fsm_prochainEtat <= sta_transTout;
-        when sta_transTout => 
-            fsm_prochainEtat <= sta_init;
-            
-        when others => fsm_prochainEtat <= sta_init;
-     end case;
-  end process;
-  
-  sortie: process(fsm_EtatCourant, i_lrc )
-  begin
-  
-   case fsm_EtatCourant is
-        when sta_init =>
-            o_bit_enable <= '1';
-            o_load_left <= '0';
-            o_load_right <= '0';
-            o_str_dat <= '0';
-            o_cpt_bit_reset <= '1';
+case(EtatCourant) is
+when init => 
+if(i_lrc = '0')then
+prochainEtat <= gauche;
+end if;
 
-            
-         when sta_enrGauche =>
-             o_bit_enable <= '1';
-             o_load_left <= '0';
-             o_load_right <= '0';
-             o_str_dat <= '0';
-             o_cpt_bit_reset <= '0';
-             
-         when sta_transGauche =>
-            o_bit_enable <= '0';
-            o_load_left <= '1';
-            o_load_right <= '0';
-            o_str_dat <= '0';
-            o_cpt_bit_reset <= '1';
-            
-         when sta_enrDroite =>
-            o_bit_enable <= '1';
-            o_load_left <= '0';
-            o_load_right <= '0';
-            o_str_dat <= '0';
-            o_cpt_bit_reset <= '1';
-             
-        when sta_transDroite =>
-            o_bit_enable <= '0';
-            o_load_left <= '0';
-            o_load_right <= '1';
-            o_str_dat <= '0';
-            o_cpt_bit_reset <= '1'; 
+when gauche => 
+if(i_cpt_bits = "0010111")then
+prochainEtat <= transmissionG;
+end if;
 
-        when sta_transTout => 
-            o_bit_enable <= '0';
-            o_load_left <= '0';
-            o_load_right <= '0';
-            o_str_dat <= '1';
-            o_cpt_bit_reset <= '0';
-     end case;
- end process;
+when transmissionG => 
+if(i_lrc = '1')then
+prochainEtat <= droite;
+end if;
+
+when droite => 
+if(i_cpt_bits = "0010111")then
+prochainEtat <= transmissionD;
+end if;
+
+when transmissionD => 
+if(rising_edge(i_bclk))then
+prochainEtat <= transmissionFin;
+end if;
+
+when transmissionFin => 
+if(rising_edge(i_bclk))then
+prochainEtat <= init;
+end if;
+when others => prochainEtat <= init;
+end case;
+end process;
+
+sortie: process(prochainEtat)
+begin
+
+case(prochainEtat)is
+when init =>
+o_cpt_bit_reset <= '1';
+o_bit_enable <= '0';
+o_load_left <= '0';
+o_load_right <= '0';
+o_str_dat <= '0';
+
+when gauche =>
+o_cpt_bit_reset <= '0';
+o_bit_enable <= '1';
+o_load_left <= '0';
+o_load_right <= '0';
+o_str_dat <= '0';
+
+when transmissionG =>
+o_cpt_bit_reset <= '1';
+o_bit_enable <= '0';
+o_load_left <= '1';
+o_load_right <= '0';
+o_str_dat <= '0';
+
+when droite =>
+o_cpt_bit_reset <= '0';
+o_bit_enable <= '1';
+o_load_left <= '0';
+o_load_right <= '0';
+o_str_dat <= '0';
+
+
+when transmissionD =>
+o_cpt_bit_reset <= '1';
+o_bit_enable <= '0';
+o_load_left <= '0';
+o_load_right <= '1';
+o_str_dat <= '0';
+
+
+when transmissionFin =>
+o_cpt_bit_reset <= '0';
+o_bit_enable <= '0';
+o_load_left <= '0';
+o_load_right <= '0';
+o_str_dat <= '1';
+end case;
+end process;
+   
     
-   -- pour detecter transitions d_ac_reclrc
-   reglrc_I2S: process ( i_bclk)
-   begin
-   if i_bclk'event and (i_bclk = '1') then
-        d_reclrc_prec <= i_lrc;
-   end if;
-   end process;
 
-     end Behavioral;
+ end Behavioral;
