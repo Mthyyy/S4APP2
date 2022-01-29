@@ -2,11 +2,11 @@
 # Webtalk v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Sat Jan 29 10:16:40 2022
-# Process ID: 26056
-# Current directory: C:/Users/Utilisateur/Desktop/Universite temp/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim
-# Command line: wbtcv.exe -mode batch -source C:/Users/Utilisateur/Desktop/Universite temp/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim/xsim.dir/simul_module_sig_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-# Log file: C:/Users/Utilisateur/Desktop/Universite temp/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim/webtalk.log
-# Journal file: C:/Users/Utilisateur/Desktop/Universite temp/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim\webtalk.jou
+# Start of session at: Sat Jan 29 16:28:26 2022
+# Process ID: 1072
+# Current directory: C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim/xsim.dir/module_commande_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
-source C:/Users/Utilisateur/Desktop/Universite -notrace
+source C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.sim/sim_1/behav/xsim/xsim.dir/module_commande_tb_behav/webtalk/xsim_webtalk.tcl -notrace

@@ -84,9 +84,13 @@ if(i_lrc = '0')then
 prochainEtat <= gauche;
 end if;
 
-when gauche => 
+when gauche =>
+if(i_lrc = '0') then 
 if(i_cpt_bits = "0010111")then
 prochainEtat <= transmissionG;
+else
+prochainEtat <= gauche;
+end if;
 end if;
 
 when transmissionG => 
@@ -97,25 +101,23 @@ end if;
 when droite => 
 if(i_cpt_bits = "0010111")then
 prochainEtat <= transmissionD;
+else
+prochainEtat <= droite;
 end if;
 
 when transmissionD => 
-if(rising_edge(i_bclk))then
 prochainEtat <= transmissionFin;
-end if;
 
 when transmissionFin => 
-if(rising_edge(i_bclk))then
 prochainEtat <= init;
-end if;
 when others => prochainEtat <= init;
 end case;
 end process;
 
-sortie: process(prochainEtat)
+sortie: process(EtatCourant, i_lrc)
 begin
 
-case(prochainEtat)is
+case(EtatCourant)is
 when init =>
 o_cpt_bit_reset <= '1';
 o_bit_enable <= '0';
