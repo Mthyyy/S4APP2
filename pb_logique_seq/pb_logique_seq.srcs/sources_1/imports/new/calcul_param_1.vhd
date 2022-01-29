@@ -50,13 +50,124 @@ architecture Behavioral of calcul_param_1 is
 ---------------------------------------------------------------------------------
 -- Signaux
 ----------------------------------------------------------------------------------
-    
+  type etat_MEF is (
+         sta_init,
+         sta_1,
+         sta_2,
+         sta_3,
+         sta_cpt,
+         sta_4,
+         sta_5,
+         sta_6
+         );
+    signal fsm_EtatCourant, fsm_prochainEtat : etat_MEF;
+    signal en_cpt: std_logic;
+    signal res_cpt: std_logic;   
 
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
 begin 
+    transition: Process(i_ech)
+    begin
+        case fsm_EtatCourant is
+            when sta_init =>
+                if(i_ech(23) = '1') then
+                    fsm_prochainEtat <= sta_1;
+                end if;
+             
+             when sta_1 =>
+                if(i_ech(23) = '1') then
+                    fsm_prochainEtat <= sta_2;
+                else
+                    fsm_prochainEtat <= sta_init;
+                end if;
+                
+             when sta_2 =>
+                if(i_ech(23) = '1') then
+                    fsm_prochainEtat <= sta_3;
+                else
+                    fsm_prochainEtat <= sta_1;
+                end if;
+                
+            when sta_3 =>
+                if(i_ech(23) = '0') then
+                    fsm_prochainEtat <= sta_cpt;
+                end if;
+                
+            when sta_cpt =>
+                if(i_ech(23) = '1') then
+                    fsm_prochainEtat <= sta_4;
 
+                end if;
+                
+             when sta_4 =>
+                if(i_ech(23) = '1') then
+                    fsm_prochainEtat <= sta_cpt;
+                else
+                    fsm_prochainEtat <= sta_5;
+                end if;
+                
+            when sta_5 =>
+                if(i_ech(23) = '1') then
+                    fsm_prochainEtat <= sta_6;
+                else
+                    fsm_prochainEtat <= sta_4;
+                end if;
+            
+            when sta_6 =>
+                 if(i_ech(23) = '0') then
+                    fsm_prochainEtat <= sta_cpt;
+                end if;
+                
+            when others =>
+                fsm_prochainEtat <= sta_init;
+                
+        end case;
+    end process;
+    
+    output: Process(fsm_EtatCourant)
+    begin
+        case fsm_EtatCourant is
+            when sta_init =>
+            en_cpt <= '0';
+            res_cpt <= '0';
+            
+            when sta_1 =>
+            en_cpt <= '0';
+            res_cpt <= '0';
+            
+            when sta_2 =>
+            en_cpt <= '0';
+            res_cpt <= '0';
+            
+            when sta_3 =>
+            en_cpt <= '0';
+            res_cpt <= '0';
+            
+            when sta_cpt =>
+            en_cpt <= '1';
+            res_cpt <= '0';
+            
+            when sta_4 =>
+            en_cpt <= '1';
+            res_cpt <= '0';
+            
+            when sta_5 =>
+            en_cpt <= '1';
+            res_cpt <= '0';
+            
+            when sta_6 =>
+            en_cpt <= '1';
+            res_cpt <= '1';
+            
+            when others =>
+            en_cpt <= '0';
+            res_cpt <= '0';
+            
+        end case;
+            
+    end process;
      o_param <= x"01";    -- temporaire ...
  
 end Behavioral;
