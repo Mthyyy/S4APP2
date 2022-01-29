@@ -68,7 +68,7 @@ architecture Behavioral of mef_cod_i2s_vsb is
    signal fsm_EtatCourant, fsm_prochainEtat : fsm_cI2S_etats;
 
 begin
-    
+
    -- Assignation du prochain état
     process(i_bclk, i_reset)
     begin

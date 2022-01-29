@@ -1,8 +1,8 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Thu Jan 27 15:25:10 2022
---Host        : DESKTOP-00KO0KK running 64-bit major release  (build 9200)
+--Date        : Thu Jan 27 17:57:10 2022
+--Host        : PC-de-Mat running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
