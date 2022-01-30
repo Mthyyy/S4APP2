@@ -58,9 +58,10 @@ architecture Behavioral of calcul_param_1 is
          sta_cpt,
          sta_4,
          sta_5,
-         sta_6
+         sta_6,
+         sta_res
          );
-    signal fsm_EtatCourant, fsm_prochainEtat : etat_MEF;
+    signal fsm_EtatCourant, fsm_prochainEtat, fsm_EtatPrecedent : etat_MEF;
     signal val_cpt: std_logic_vector(7 downto 0) := "00000000";
     signal frquence: std_logic_vector(7 downto 0) := "00000000";
     signal cpt_res: std_logic;
@@ -169,10 +170,13 @@ begin
             
             when sta_6 =>
                  if(i_ech(23) = '1') then
-                    fsm_prochainEtat <= sta_cpt;
+                    fsm_prochainEtat <= sta_res;
                  else
                     fsm_prochainEtat <= sta_6;
                 end if;
+                
+            when sta_res =>
+                fsm_prochainEtat <= sta_cpt;
                 
             when others =>
                 fsm_prochainEtat <= sta_init;
@@ -213,6 +217,10 @@ begin
             
             when sta_6 =>
             cpt_en <= '1';
+            cpt_res <= '0';
+            
+            when sta_res =>
+            cpt_en <= '1';
             cpt_res <= '1';
             
             when others =>
@@ -229,14 +237,10 @@ begin
             val_cpt <= val_cpt + 1;
         end if;
         
-        if(cpt_res = '1' and cpt_en = '1') then
-            val_cpt <= val_cpt+1;
-            chuistanne <= not(chuistanne);
-            if(chuistanne = '0') then
+        if(fsm_prochainEtat = sta_res) then
             frquence <= val_cpt;
-            end if;
             val_cpt <= "00000001";
-        end if;
-        
+            end if;
+            
     end process;
 end Behavioral;
