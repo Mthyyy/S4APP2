@@ -1,8 +1,8 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Sat Jan 29 14:21:02 2022
---Host        : PC-de-Mat running 64-bit major release  (build 9200)
+--Date        : Sun Jan 30 09:45:50 2022
+--Host        : DESKTOP-00KO0KK running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -165,18 +165,6 @@ architecture STRUCTURE of M9_codeur_i2s_imp_1VJCTGL is
     o_val_cpt : out STD_LOGIC_VECTOR ( 6 downto 0 )
   );
   end component design_1_compteur_nbits_0_1;
-  component design_1_mef_cod_i2s_vsb_0_0 is
-  port (
-    i_bclk : in STD_LOGIC;
-    i_reset : in STD_LOGIC;
-    i_lrc : in STD_LOGIC;
-    i_cpt_bits : in STD_LOGIC_VECTOR ( 6 downto 0 );
-    o_bit_enable : out STD_LOGIC;
-    o_load_left : out STD_LOGIC;
-    o_load_right : out STD_LOGIC;
-    o_cpt_bit_reset : out STD_LOGIC
-  );
-  end component design_1_mef_cod_i2s_vsb_0_0;
   component design_1_mux2_0_0 is
   port (
     sel : in STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -221,6 +209,18 @@ architecture STRUCTURE of M9_codeur_i2s_imp_1VJCTGL is
     Dout : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_xlslice_0_0;
+  component design_1_mef_cod_i2s_vsb_0_0 is
+  port (
+    i_bclk : in STD_LOGIC;
+    i_reset : in STD_LOGIC;
+    i_lrc : in STD_LOGIC;
+    i_cpt_bits : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    o_bit_enable : out STD_LOGIC;
+    o_load_left : out STD_LOGIC;
+    o_load_right : out STD_LOGIC;
+    o_cpt_bit_reset : out STD_LOGIC
+  );
+  end component design_1_mef_cod_i2s_vsb_0_0;
   signal compteur_nbits_0_o_val_cpt : STD_LOGIC_VECTOR ( 6 downto 0 );
   signal i_bclk_0_1 : STD_LOGIC;
   signal i_lrc_0_1 : STD_LOGIC;
@@ -326,7 +326,7 @@ use UNISIM.VCOMPONENTS.ALL;
     o_sel_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=26,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=19,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=26,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=19,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""""""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -341,24 +341,6 @@ architecture STRUCTURE of design_1 is
     JPmod : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component design_1_affhexPmodSSD_v3_0_0;
-  component design_1_calcul_param_1_0_0 is
-  port (
-    i_bclk : in STD_LOGIC;
-    i_reset : in STD_LOGIC;
-    i_en : in STD_LOGIC;
-    i_ech : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    o_param : out STD_LOGIC_VECTOR ( 7 downto 0 )
-  );
-  end component design_1_calcul_param_1_0_0;
-  component design_1_calcul_param_2_0_0 is
-  port (
-    i_bclk : in STD_LOGIC;
-    i_reset : in STD_LOGIC;
-    i_en : in STD_LOGIC;
-    i_ech : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    o_param : out STD_LOGIC_VECTOR ( 7 downto 0 )
-  );
-  end component design_1_calcul_param_2_0_0;
   component design_1_calcul_param_3_0_0 is
   port (
     i_bclk : in STD_LOGIC;
@@ -368,17 +350,6 @@ architecture STRUCTURE of design_1 is
     o_param : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component design_1_calcul_param_3_0_0;
-  component design_1_module_commande_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    o_reset : out STD_LOGIC;
-    i_btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    i_sw : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    o_btn_cd : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    o_selection_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    o_selection_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
-  );
-  end component design_1_module_commande_0_0;
   component design_1_mux4_0_0 is
   port (
     input0 : in STD_LOGIC_VECTOR ( 23 downto 0 );
@@ -422,6 +393,35 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component design_1_xlconstant_0_0;
+  component design_1_calcul_param_2_0_0 is
+  port (
+    i_bclk : in STD_LOGIC;
+    i_reset : in STD_LOGIC;
+    i_en : in STD_LOGIC;
+    i_ech : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    o_param : out STD_LOGIC_VECTOR ( 7 downto 0 )
+  );
+  end component design_1_calcul_param_2_0_0;
+  component design_1_module_commande_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    o_reset : out STD_LOGIC;
+    i_btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    i_sw : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    o_btn_cd : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    o_selection_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    o_selection_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
+  );
+  end component design_1_module_commande_0_0;
+  component design_1_calcul_param_1_0_0 is
+  port (
+    i_bclk : in STD_LOGIC;
+    i_reset : in STD_LOGIC;
+    i_en : in STD_LOGIC;
+    i_ech : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    o_param : out STD_LOGIC_VECTOR ( 7 downto 0 )
+  );
+  end component design_1_calcul_param_1_0_0;
   signal M10_conversion_affichage_JPmod : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal M8_commande_o_btn_cd : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal M8_commande_o_selection_par : STD_LOGIC_VECTOR ( 1 downto 0 );

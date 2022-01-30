@@ -61,99 +61,117 @@ architecture Behavioral of calcul_param_1 is
          sta_6
          );
     signal fsm_EtatCourant, fsm_prochainEtat : etat_MEF;
-    signal en_cpt: std_logic;
-    signal res_cpt: std_logic;
-    signal val_cpt: std_logic_vector(15 downto 0);
-    signal frquence: std_logic_vector(15 downto 0);
-    signal division: std_logic_vector(15 downto 0);
-    signal max: std_logic_vector(15 downto 0);
-    
-component compteur_nbits is
-generic (nbits : integer := 16);
-   port ( clk             : in    std_logic; 
-          i_en            : in    std_logic; 
-          reset           : in    std_logic; 
-          o_val_cpt       : out   std_logic_vector (nbits-1 downto 0)
-          );
-end component;    
+    signal val_cpt: std_logic_vector(7 downto 0) := "00000000";
+    signal frquence: std_logic_vector(7 downto 0) := "00000000";
+    signal cpt_res: std_logic;
+    signal cpt_en: std_logic;
+    signal enableSuivant: std_logic := '0';
+    signal enableCourant : std_logic := '0'; 
+    signal mySignal_re : std_logic := '0';
+    signal chuistanne : std_logic := '0';
+     
 
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
-begin 
+begin
     
-    max <= "1011101110000000";
-    o_param <= division(15) & division(14)& division(13) & division(12) & division(11) & division(10) & division(9) & division(8);
-    
-    inst_cpt: compteur_nbits
-        port map(
-                clk => i_bclk,
-                i_en => en_cpt,
-                reset => res_cpt,
-                o_val_cpt => val_cpt
-                );
-                
-    calculFrequence: Process(fsm_EtatCourant)
+    process(i_bclk)
     begin
-        case fsm_EtatCourant is
-            when sta_6 => frquence <= val_cpt;
-            when others => frquence <= frquence;
-        end case;
+        if rising_edge(i_bclk) then
+            enableCourant <= enableSuivant;
+            enableSuivant <= i_en;
+        end if;
         
-     division <= std_logic_vector(to_signed(to_integer(signed(frquence)/ signed(max)),16));   
-     
+        
+    end process;
+    
+    process(enableSuivant)
+    begin
+        if(enableCourant /= enableSuivant and enableSuivant = '1') then
+            mySignal_re <= not(mySignal_re);
+        end if;
     end process;
 
-    transition: Process(i_ech)
+    
+       -- Assignation du prochain état
+    process(i_bclk, i_reset)
+    begin
+       if (i_reset ='1') then
+             fsm_EtatCourant <= sta_init;
+       else
+       if rising_edge(i_bclk) then
+             fsm_EtatCourant <= fsm_prochainEtat;
+       end if;
+       end if;
+    end process;
+
+    o_param(7) <= frquence(7);
+    o_param(6) <= frquence(6);
+    o_param(5) <= frquence(5);
+    o_param(4) <= frquence(4);
+    o_param(3) <= frquence(3);
+    o_param(2) <= frquence(2);
+    o_param(1) <= frquence(1);
+    o_param(0)<= frquence(0);              
+
+    transition: Process(mySignal_re)
     begin
         case fsm_EtatCourant is
             when sta_init =>
-                if(i_ech(23) = '1') then
+                if(i_ech(23) = '0') then
                     fsm_prochainEtat <= sta_1;
                 end if;
              
              when sta_1 =>
-                if(i_ech(23) = '1') then
+                if(i_ech(23) = '0') then
                     fsm_prochainEtat <= sta_2;
                 else
                     fsm_prochainEtat <= sta_init;
                 end if;
                 
              when sta_2 =>
-                if(i_ech(23) = '1') then
+                if(i_ech(23) = '0') then
                     fsm_prochainEtat <= sta_3;
                 else
                     fsm_prochainEtat <= sta_1;
                 end if;
                 
             when sta_3 =>
-                if(i_ech(23) = '0') then
+                if(i_ech(23) = '1') then
                     fsm_prochainEtat <= sta_cpt;
+                else
+                    fsm_prochainEtat <= sta_3;
                 end if;
                 
             when sta_cpt =>
-                if(i_ech(23) = '1') then
+                if(i_ech(23) = '0') then
                     fsm_prochainEtat <= sta_4;
+                    
+                else
+                    fsm_prochainEtat <= sta_cpt;
 
                 end if;
                 
              when sta_4 =>
-                if(i_ech(23) = '1') then
-                    fsm_prochainEtat <= sta_cpt;
-                else
+                if(i_ech(23) = '0') then
                     fsm_prochainEtat <= sta_5;
+                else
+                    fsm_prochainEtat <= sta_cpt;
                 end if;
                 
             when sta_5 =>
-                if(i_ech(23) = '1') then
+                if(i_ech(23) = '0') then
                     fsm_prochainEtat <= sta_6;
                 else
                     fsm_prochainEtat <= sta_4;
                 end if;
             
             when sta_6 =>
-                 if(i_ech(23) = '0') then
+                 if(i_ech(23) = '1') then
                     fsm_prochainEtat <= sta_cpt;
+                 else
+                    fsm_prochainEtat <= sta_6;
                 end if;
                 
             when others =>
@@ -166,44 +184,59 @@ begin
     begin
         case fsm_EtatCourant is
             when sta_init =>
-            en_cpt <= '0';
-            res_cpt <= '0';
+            cpt_en <= '0';
+            cpt_res <= '0';
             
             when sta_1 =>
-            en_cpt <= '0';
-            res_cpt <= '0';
+            cpt_en <= '0';
+            cpt_res <= '0';
             
             when sta_2 =>
-            en_cpt <= '0';
-            res_cpt <= '0';
+            cpt_en <= '0';
+            cpt_res <= '0';
             
             when sta_3 =>
-            en_cpt <= '0';
-            res_cpt <= '0';
+            cpt_en <= '0';
+            cpt_res <= '0';
             
             when sta_cpt =>
-            en_cpt <= '1';
-            res_cpt <= '1';
+            cpt_en <= '1';
+            cpt_res <= '0';
             
             when sta_4 =>
-            en_cpt <= '1';
-            res_cpt <= '0';
+            cpt_en <= '1';
+            cpt_res <= '0';
             
             when sta_5 =>
-            en_cpt <= '1';
-            res_cpt <= '0';
+            cpt_en <= '1';
+            cpt_res <= '0';
             
             when sta_6 =>
-            en_cpt <= '1';
-            res_cpt <= '0';
+            cpt_en <= '1';
+            cpt_res <= '1';
             
             when others =>
-            en_cpt <= '0';
-            res_cpt <= '0';
+            cpt_en <= '0';
+            cpt_res <= '0';
             
         end case;
-            
+      
     end process;
-     o_param <= x"01";    -- temporaire ...
- 
+
+    compteur: process(mySignal_re)
+    begin
+        if(cpt_en = '1' and cpt_res = '0') then
+            val_cpt <= val_cpt + 1;
+        end if;
+        
+        if(cpt_res = '1' and cpt_en = '1') then
+            val_cpt <= val_cpt+1;
+            chuistanne <= not(chuistanne);
+            if(chuistanne = '0') then
+            frquence <= val_cpt;
+            end if;
+            val_cpt <= "00000001";
+        end if;
+        
+    end process;
 end Behavioral;

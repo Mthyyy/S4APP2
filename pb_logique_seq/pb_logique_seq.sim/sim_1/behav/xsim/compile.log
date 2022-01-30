@@ -1,8 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.srcs/sources_1/imports/new/conditionne_btn_v7.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'conditionne_btn_v7'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.srcs/sources_1/imports/new/module_commande.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'module_commande'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.srcs/sources_1/imports/new/strb_gen_v3.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'strb_gen'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/travail/S4APP2/pb_logique_seq/pb_logique_seq.srcs/sim_1/imports/new/module_commande_tb.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'module_commande_tb'
