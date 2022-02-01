@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.862373",
-   "Default View_TopLeft":"-128,-63",
+   "Default View_ScaleFactor":"1.16629",
+   "Default View_TopLeft":"-46,238",
    "ExpandedHierarchyInLayout":"",
    "comment_1":"Modules à modifier:
 MEF_decodeur_i2s (dans M1_decodeur_i2s)
@@ -13,63 +13,89 @@ et les resets dans les paramètres (engrenage en haut a droite de cette fenêtre).
 ",
    "commentid":"comment_1|",
    "font_comment_1":"14",
-   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS-threadsafe
 #  -string -flagsOSRD
-preplace port i_recdat -pg 1 -lvl 0 -x 0 -y 270 -defaultsOSRD
-preplace port i_lrc -pg 1 -lvl 0 -x 0 -y 290 -defaultsOSRD
-preplace port clk_100MHz -pg 1 -lvl 0 -x 0 -y 190 -defaultsOSRD
-preplace portBus i_btn -pg 1 -lvl 0 -x 0 -y 600 -defaultsOSRD
-preplace portBus i_sw -pg 1 -lvl 0 -x 0 -y 620 -defaultsOSRD
-preplace portBus o_pbdat -pg 1 -lvl 7 -x 1890 -y 770 -defaultsOSRD
-preplace portBus JPmod -pg 1 -lvl 7 -x 1890 -y 560 -defaultsOSRD
-preplace portBus o_param -pg 1 -lvl 7 -x 1890 -y 380 -defaultsOSRD
-preplace portBus o_sel_par -pg 1 -lvl 7 -x 1890 -y 670 -defaultsOSRD
-preplace portBus o_sel_fct -pg 1 -lvl 7 -x 1890 -y 650 -defaultsOSRD
-preplace inst M1_decodeur_i2s -pg 1 -lvl 1 -x 150 -y 280 -defaultsOSRD
-preplace inst M9_codeur_i2s -pg 1 -lvl 6 -x 1740 -y 770 -defaultsOSRD
-preplace inst M10_conversion_affichage -pg 1 -lvl 6 -x 1740 -y 560 -defaultsOSRD
-preplace inst M7_parametre_3 -pg 1 -lvl 4 -x 1080 -y 400 -defaultsOSRD
-preplace inst Multiplexeur_choix_fonction -pg 1 -lvl 3 -x 760 -y 90 -defaultsOSRD
-preplace inst Multiplexeur_choix_parametre -pg 1 -lvl 5 -x 1400 -y 380 -defaultsOSRD
-preplace inst M4_fonction3 -pg 1 -lvl 2 -x 440 -y 520 -defaultsOSRD
-preplace inst M2_fonction_distortion_dure1 -pg 1 -lvl 2 -x 440 -y 320 -defaultsOSRD
-preplace inst M3_fonction_distorsion_dure2 -pg 1 -lvl 2 -x 440 -y 420 -defaultsOSRD
-preplace inst parametre_0 -pg 1 -lvl 4 -x 1080 -y 530 -defaultsOSRD
-preplace inst M6_parametre_2 -pg 1 -lvl 4 -x 1080 -y 240 -defaultsOSRD
-preplace inst M8_commande -pg 1 -lvl 5 -x 1400 -y 600 -defaultsOSRD
-preplace inst M5_parametre_1 -pg 1 -lvl 4 -x 1080 -y 80 -defaultsOSRD
-preplace netloc sig_fct_sat_dure_0_o_ech_fct 1 2 1 580 70n
-preplace netloc sig_fct_sat_dure_1_o_ech_fct 1 2 1 590 90n
-preplace netloc sig_fct_3_0_o_ech_fct 1 2 1 600 110n
-preplace netloc module_commande_0_o_selection_fct 1 2 5 610 630 NJ 630 1240J 510 1550 650 NJ
-preplace netloc calcul_param_1_0_o_param 1 4 1 1240 80n
-preplace netloc calcul_param_2_0_o_param 1 4 1 1220 240n
-preplace netloc calcul_param_3_0_o_param 1 4 1 N 400
-preplace netloc xlconstant_0_dout 1 4 1 1210J 340n
-preplace netloc decodeur_i2s_o_str_dat 1 1 3 260J 230 NJ 230 930
-preplace netloc clk_1 1 0 6 20 190 NJ 190 NJ 190 920 590 1220 490 1570
-preplace netloc i_data_1 1 0 1 NJ 270
-preplace netloc i_lrc_1 1 0 6 20 360 290J 250 NJ 250 910J 730 NJ 730 NJ
-preplace netloc mux4_1_output 1 5 2 1590 380 NJ
-preplace netloc i_btn_1 1 0 5 NJ 600 NJ 600 590J 610 NJ 610 1250J
-preplace netloc i_sw_1 1 0 5 NJ 620 NJ 620 NJ 620 NJ 620 NJ
-preplace netloc i_dat_left_1 1 1 5 300J 260 NJ 260 890J 750 NJ 750 N
-preplace netloc i_dat_right_1 1 3 3 900 770 NJ 770 NJ
-preplace netloc decodeur_i2s_o_dat_right 1 1 2 270 50 N
-preplace netloc M8_commande_o_selection_par 1 4 3 1240 480 1580 470 1860J
-preplace netloc M9_codeur_i2s_o_dat 1 6 1 NJ 770
-preplace netloc M10_conversion_affichage_JPmod 1 6 1 NJ 560
-preplace netloc i_reset_1 1 0 6 30 370 280J 240 NJ 240 940 600 1230J 500 1560
-preplace netloc M8_commande_o_btn_cd 1 5 1 N 590
-preplace cgraphic comment_1 place top 0 10 textcolor 4 linecolor 3
-levelinfo -pg 1 0 150 440 760 1080 1400 1740 1890
-pagesize -pg 1 -db -bbox -sgen -130 -10 2030 860
+preplace port i_recdat -pg 1 -lvl 0 -x -170 -y 340 -defaultsOSRD
+preplace port i_lrc -pg 1 -lvl 0 -x -170 -y 370 -defaultsOSRD
+preplace port clk_100MHz -pg 1 -lvl 0 -x -170 -y 310 -defaultsOSRD
+preplace portBus i_btn -pg 1 -lvl 0 -x -170 -y 720 -defaultsOSRD
+preplace portBus i_sw -pg 1 -lvl 0 -x -170 -y 750 -defaultsOSRD
+preplace portBus o_pbdat -pg 1 -lvl 0 -x -170 -y 570 -defaultsOSRD -left
+preplace portBus JPmod -pg 1 -lvl 7 -x 3310 -y 270 -defaultsOSRD
+preplace portBus o_param -pg 1 -lvl 7 -x 3310 -y 120 -defaultsOSRD
+preplace portBus o_sel_par -pg 1 -lvl 7 -x 3310 -y 720 -defaultsOSRD
+preplace portBus o_sel_fct -pg 1 -lvl 7 -x 3310 -y 690 -defaultsOSRD
+preplace inst M1_decodeur_i2s -pg 1 -lvl 1 -x 130 -y 350 -defaultsOSRD
+preplace inst M9_codeur_i2s -pg 1 -lvl 1 -x 130 -y 572 -defaultsOSRD
+preplace inst M10_conversion_affichage -pg 1 -lvl 6 -x 3170 -y 270 -defaultsOSRD
+preplace inst M7_parametre_3 -pg 1 -lvl 4 -x 2584 -y 480 -defaultsOSRD
+preplace inst Multiplexeur_choix_fonction -pg 1 -lvl 3 -x 2290 -y 270 -defaultsOSRD
+preplace inst Multiplexeur_choix_parametre -pg 1 -lvl 5 -x 2890 -y 280 -defaultsOSRD
+preplace inst M4_fonction3 -pg 1 -lvl 2 -x 2010 -y 380 -defaultsOSRD
+preplace inst M2_fonction_distortion_dure1 -pg 1 -lvl 2 -x 2010 -y 180 -defaultsOSRD
+preplace inst M3_fonction_distorsion_dure2 -pg 1 -lvl 2 -x 2010 -y 280 -defaultsOSRD
+preplace inst parametre_0 -pg 1 -lvl 4 -x 2584 -y 30 -defaultsOSRD
+preplace inst M6_parametre_2 -pg 1 -lvl 4 -x 2584 -y 320 -defaultsOSRD
+preplace inst M8_commande -pg 1 -lvl 2 -x 2010 -y 730 -defaultsOSRD
+preplace inst M5_parametre_1 -pg 1 -lvl 4 -x 2584 -y 160 -defaultsOSRD
+preplace inst M9_codeur_i2s|mux2_0 -pg 1 -lvl 4 -x 1040 -y 772 -defaultsOSRD
+preplace inst M9_codeur_i2s|reg_dec_24b_fd_0 -pg 1 -lvl 5 -x 1350 -y 882 -defaultsOSRD
+preplace inst M9_codeur_i2s|util_vector_logic_0 -pg 1 -lvl 4 -x 1040 -y 962 -defaultsOSRD
+preplace inst M9_codeur_i2s|xlconcat_0 -pg 1 -lvl 3 -x 780 -y 752 -defaultsOSRD
+preplace inst M9_codeur_i2s|xlconstant_0 -pg 1 -lvl 4 -x 1040 -y 1072 -defaultsOSRD
+preplace inst M9_codeur_i2s|xlslice_0 -pg 1 -lvl 6 -x 1600 -y 882 -defaultsOSRD
+preplace inst M9_codeur_i2s|mef_cod_i2s_vsb_0 -pg 1 -lvl 2 -x 490 -y 592 -defaultsOSRD
+preplace inst M9_codeur_i2s|compteur_nbits_0 -pg 1 -lvl 1 -x 210 -y 622 -defaultsOSRD
+preplace netloc sig_fct_sat_dure_0_o_ech_fct 1 2 1 2150 180n
+preplace netloc sig_fct_sat_dure_1_o_ech_fct 1 2 1 2160 270n
+preplace netloc sig_fct_3_0_o_ech_fct 1 2 1 2150 290n
+preplace netloc module_commande_0_o_selection_fct 1 2 5 2160 690 N 690 N 690 N 690 N
+preplace netloc calcul_param_1_0_o_param 1 4 1 2730 160n
+preplace netloc calcul_param_2_0_o_param 1 4 1 2730 280n
+preplace netloc calcul_param_3_0_o_param 1 4 1 2750 300n
+preplace netloc xlconstant_0_dout 1 4 1 2760 30n
+preplace netloc decodeur_i2s_o_str_dat 1 1 3 1860J 440 NJ 440 2450
+preplace netloc clk_1 1 0 6 -140 432 1850J 450 NJ 450 2430 570 2720 170 3040
+preplace netloc i_data_1 1 0 1 NJ 340
+preplace netloc i_lrc_1 1 0 1 -120 360n
+preplace netloc mux4_1_output 1 5 2 3030 120 N
+preplace netloc i_btn_1 1 0 2 -150J 1152 1860J
+preplace netloc i_sw_1 1 0 2 -130J 462 1830J
+preplace netloc i_dat_left_1 1 0 2 -90 260 1850J
+preplace netloc i_dat_right_1 1 0 4 -110 110 N 110 N 110 2420
+preplace netloc decodeur_i2s_o_dat_right 1 1 2 1870 120 2160
+preplace netloc M8_commande_o_selection_par 1 2 5 N 760 N 760 2760 720 N 720 N
+preplace netloc M9_codeur_i2s_o_dat 1 0 2 -150 452 1820
+preplace netloc M10_conversion_affichage_JPmod 1 6 1 N 270
+preplace netloc i_reset_1 1 0 6 -100 442 1840J 460 2150J 460 2440 580 2740 180 3020
+preplace netloc M8_commande_o_btn_cd 1 2 4 N 720 N 720 2740 680 3030
+preplace netloc M9_codeur_i2s|compteur_nbits_0_o_val_cpt 1 1 1 N 622
+preplace netloc M9_codeur_i2s|mef_cod_i2s_vsb_0_o_cpt_bit_reset 1 0 3 90 712 NJ 712 630
+preplace netloc M9_codeur_i2s|mef_cod_i2s_vsb_0_o_bit_enable 1 0 5 80 732 NJ 732 660 642 NJ 642 1200J
+preplace netloc M9_codeur_i2s|mux2_0_output 1 4 1 1180 772n
+preplace netloc M9_codeur_i2s|util_vector_logic_0_Res 1 4 1 1190 872n
+preplace netloc M9_codeur_i2s|mef_cod_i2s_vsb_0_o_load_left 1 2 2 670 652 900J
+preplace netloc M9_codeur_i2s|mef_cod_i2s_vsb_0_o_load_right 1 2 2 650 662 870J
+preplace netloc M9_codeur_i2s|xlconcat_0_dout 1 3 1 N 752
+preplace netloc M9_codeur_i2s|i_lrc_0_1 1 0 2 NJ 532 350
+preplace netloc M9_codeur_i2s|input1_0_1 1 0 4 NJ 702 NJ 702 690J 682 880
+preplace netloc M9_codeur_i2s|input2_0_1 1 0 4 NJ 722 NJ 722 680J 672 890
+preplace netloc M9_codeur_i2s|i_reset_0_1 1 0 5 NJ 862 340 852 NJ 852 NJ 852 NJ
+preplace netloc M9_codeur_i2s|i_bclk_0_1 1 0 5 70 542 330 682 640J 632 NJ 632 1210
+preplace netloc M9_codeur_i2s|xlconstant_0_dout 1 4 1 1210 912n
+preplace netloc M9_codeur_i2s|reg_dec_24b_fd_0_o_dat 1 5 1 NJ 882
+preplace netloc M9_codeur_i2s|xlslice_0_Dout 1 6 1 NJ 882
+preplace cgraphic comment_1 place top 0 30 textcolor 4 linecolor 3
+levelinfo -pg 1 -170 130 2010 2290 2584 2890 3170 3310
+levelinfo -hier M9_codeur_i2s * 210 490 780 1040 1350 1600 *
+pagesize -pg 1 -db -bbox -sgen -300 -30 3450 1170
+pagesize -hier M9_codeur_i2s -db -bbox -sgen 40 502 1730 1132
 ",
    "linktoobj_comment_1":"",
    "linktotype_comment_1":"bd_design"
 }
 {
-   """""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""":"1"
+   """"""""""""""""""""""""""""""""""da_clkrst_cnt"""""""""""""""""""""""""""""""""":"1"
 }
 {
    "/comment_1":"comment_1",

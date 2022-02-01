@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Sun Jan 30 09:45:50 2022
+--Date        : Mon Jan 31 16:18:54 2022
 --Host        : DESKTOP-00KO0KK running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -24,14 +24,6 @@ entity M1_decodeur_i2s_imp_17RYJKZ is
 end M1_decodeur_i2s_imp_17RYJKZ;
 
 architecture STRUCTURE of M1_decodeur_i2s_imp_17RYJKZ is
-  component design_1_compteur_nbits_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    i_en : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    o_val_cpt : out STD_LOGIC_VECTOR ( 6 downto 0 )
-  );
-  end component design_1_compteur_nbits_0_0;
   component design_1_reg_24b_0_0 is
   port (
     i_clk : in STD_LOGIC;
@@ -74,6 +66,14 @@ architecture STRUCTURE of M1_decodeur_i2s_imp_17RYJKZ is
     o_cpt_bit_reset : out STD_LOGIC
   );
   end component design_1_mef_decod_i2s_v1b_0_0;
+  component design_1_compteur_nbits_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    i_en : in STD_LOGIC;
+    reset : in STD_LOGIC;
+    o_val_cpt : out STD_LOGIC_VECTOR ( 6 downto 0 )
+  );
+  end component design_1_compteur_nbits_0_0;
   signal clk_1 : STD_LOGIC;
   signal compteur_nbits_0_o_val_cpt : STD_LOGIC_VECTOR ( 6 downto 0 );
   signal i_data_1 : STD_LOGIC;
@@ -157,14 +157,6 @@ entity M9_codeur_i2s_imp_1VJCTGL is
 end M9_codeur_i2s_imp_1VJCTGL;
 
 architecture STRUCTURE of M9_codeur_i2s_imp_1VJCTGL is
-  component design_1_compteur_nbits_0_1 is
-  port (
-    clk : in STD_LOGIC;
-    i_en : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    o_val_cpt : out STD_LOGIC_VECTOR ( 6 downto 0 )
-  );
-  end component design_1_compteur_nbits_0_1;
   component design_1_mux2_0_0 is
   port (
     sel : in STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -221,6 +213,14 @@ architecture STRUCTURE of M9_codeur_i2s_imp_1VJCTGL is
     o_cpt_bit_reset : out STD_LOGIC
   );
   end component design_1_mef_cod_i2s_vsb_0_0;
+  component design_1_compteur_nbits_0_1 is
+  port (
+    clk : in STD_LOGIC;
+    i_en : in STD_LOGIC;
+    reset : in STD_LOGIC;
+    o_val_cpt : out STD_LOGIC_VECTOR ( 6 downto 0 )
+  );
+  end component design_1_compteur_nbits_0_1;
   signal compteur_nbits_0_o_val_cpt : STD_LOGIC_VECTOR ( 6 downto 0 );
   signal i_bclk_0_1 : STD_LOGIC;
   signal i_lrc_0_1 : STD_LOGIC;
@@ -325,10 +325,10 @@ use UNISIM.VCOMPONENTS.ALL;
     o_sel_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
     o_sel_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=26,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=19,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""""""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
-  attribute HW_HANDOFF : string;
-  attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
+  attribute core_generation_info : string;
+  attribute core_generation_info of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=26,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=19,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
+  attribute hw_handoff : string;
+  attribute hw_handoff of design_1 : entity is "design_1.hwdef";
 end design_1;
 
 architecture STRUCTURE of design_1 is
@@ -445,10 +445,10 @@ architecture STRUCTURE of design_1 is
   signal sig_fct_sat_dure_0_o_ech_fct : STD_LOGIC_VECTOR ( 23 downto 0 );
   signal sig_fct_sat_dure_1_o_ech_fct : STD_LOGIC_VECTOR ( 23 downto 0 );
   signal xlconstant_0_dout : STD_LOGIC_VECTOR ( 7 downto 0 );
-  attribute X_INTERFACE_INFO : string;
-  attribute X_INTERFACE_INFO of clk_100MHz : signal is "xilinx.com:signal:clock:1.0 CLK.CLK_100MHZ CLK";
-  attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of clk_100MHz : signal is "XIL_INTERFACENAME CLK.CLK_100MHZ, CLK_DOMAIN design_1_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
+  attribute x_interface_info : string;
+  attribute x_interface_info of clk_100MHz : signal is "xilinx.com:signal:clock:1.0 CLK.CLK_100MHZ CLK";
+  attribute x_interface_parameter : string;
+  attribute x_interface_parameter of clk_100MHz : signal is "XIL_INTERFACENAME CLK.CLK_100MHZ, CLK_DOMAIN design_1_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
 begin
   JPmod(7 downto 0) <= M10_conversion_affichage_JPmod(7 downto 0);
   clk_1 <= clk_100MHz;

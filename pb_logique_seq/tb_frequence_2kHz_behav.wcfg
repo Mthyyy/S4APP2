@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_frequence_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_frequence" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="2001000000fs"></ZoomEndTime>
+      <Cursor1Time time="1217679912fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="208"></NameColumnWidth>
+      <ValueColumnWidth column_width="101"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/i_bclk" type="logic">
+      <obj_property name="ElementShortName">i_bclk</obj_property>
+      <obj_property name="ObjectShortName">i_bclk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/i_reset" type="logic">
+      <obj_property name="ElementShortName">i_reset</obj_property>
+      <obj_property name="ObjectShortName">i_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/i_en" type="logic">
+      <obj_property name="ElementShortName">i_en</obj_property>
+      <obj_property name="ObjectShortName">i_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/i_ech" type="array">
+      <obj_property name="ElementShortName">i_ech[23:0]</obj_property>
+      <obj_property name="ObjectShortName">i_ech[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/o_param" type="array">
+      <obj_property name="ElementShortName">o_param[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_param[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/fsm_EtatCourant" type="other">
+      <obj_property name="ElementShortName">fsm_EtatCourant</obj_property>
+      <obj_property name="ObjectShortName">fsm_EtatCourant</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/fsm_prochainEtat" type="other">
+      <obj_property name="ElementShortName">fsm_prochainEtat</obj_property>
+      <obj_property name="ObjectShortName">fsm_prochainEtat</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/val_cpt" type="array">
+      <obj_property name="ElementShortName">val_cpt[7:0]</obj_property>
+      <obj_property name="ObjectShortName">val_cpt[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/frquence" type="array">
+      <obj_property name="ElementShortName">frquence[7:0]</obj_property>
+      <obj_property name="ObjectShortName">frquence[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/cpt_res" type="logic">
+      <obj_property name="ElementShortName">cpt_res</obj_property>
+      <obj_property name="ObjectShortName">cpt_res</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/cpt_en" type="logic">
+      <obj_property name="ElementShortName">cpt_en</obj_property>
+      <obj_property name="ObjectShortName">cpt_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_frequence/UUT_mod_sig/M5_parametre_1/U0/cpt_stb" type="logic">
+      <obj_property name="ElementShortName">cpt_stb</obj_property>
+      <obj_property name="ObjectShortName">cpt_stb</obj_property>
+   </wvobject>
+</wave_config>

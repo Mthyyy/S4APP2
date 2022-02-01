@@ -47,6 +47,15 @@ end calcul_param_1;
 
 architecture Behavioral of calcul_param_1 is
 
+component compteur_nbits is
+generic (nbits : integer := 8);
+   port ( clk             : in    std_logic; 
+          i_en            : in    std_logic; 
+          reset           : in    std_logic; 
+          o_val_cpt       : out   std_logic_vector (nbits-1 downto 0)
+          );
+end component;
+
 ---------------------------------------------------------------------------------
 -- Signaux
 ----------------------------------------------------------------------------------
@@ -59,41 +68,31 @@ architecture Behavioral of calcul_param_1 is
          sta_4,
          sta_5,
          sta_6,
-         sta_res
+         sta_cpt_en,
+         sta_4_en,
+         sta_5_en,
+         sta_6_en,
+         sta_res,
+         sta_send
          );
-    signal fsm_EtatCourant, fsm_prochainEtat, fsm_EtatPrecedent : etat_MEF;
+    signal fsm_EtatCourant, fsm_prochainEtat : etat_MEF;
     signal val_cpt: std_logic_vector(7 downto 0) := "00000000";
     signal frquence: std_logic_vector(7 downto 0) := "00000000";
     signal cpt_res: std_logic;
     signal cpt_en: std_logic;
-    signal enableSuivant: std_logic := '0';
-    signal enableCourant : std_logic := '0'; 
-    signal mySignal_re : std_logic := '0';
-    signal chuistanne : std_logic := '0';
+    signal cpt_stb: std_logic;
      
 
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
 begin
-    
-    process(i_bclk)
-    begin
-        if rising_edge(i_bclk) then
-            enableCourant <= enableSuivant;
-            enableSuivant <= i_en;
-        end if;
-        
-        
-    end process;
-    
-    process(enableSuivant)
-    begin
-        if(enableCourant /= enableSuivant and enableSuivant = '1') then
-            mySignal_re <= not(mySignal_re);
-        end if;
-    end process;
 
+    inst_compteur: compteur_nbits
+        port map(clk =>i_bclk,
+         i_en => cpt_en,
+          reset => cpt_res,
+           o_val_cpt => val_cpt);
     
        -- Assignation du prochain état
     process(i_bclk, i_reset)
@@ -114,67 +113,78 @@ begin
     o_param(3) <= frquence(3);
     o_param(2) <= frquence(2);
     o_param(1) <= frquence(1);
-    o_param(0)<= frquence(0);              
+    o_param(0)<= frquence(0);             
 
-    transition: Process(mySignal_re)
+    transition: Process(fsm_etatCourant, i_bclk)
     begin
         case fsm_EtatCourant is
             when sta_init =>
-                if(i_ech(23) = '0') then
+                if(i_ech(23) = '0' and i_en = '1') then
                     fsm_prochainEtat <= sta_1;
                 end if;
              
              when sta_1 =>
-                if(i_ech(23) = '0') then
+                if(i_ech(23) = '0' and i_en = '1') then
                     fsm_prochainEtat <= sta_2;
-                else
+                elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_init;
                 end if;
                 
              when sta_2 =>
-                if(i_ech(23) = '0') then
+                if(i_ech(23) = '0' and i_en = '1') then
                     fsm_prochainEtat <= sta_3;
-                else
+                elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_1;
                 end if;
                 
             when sta_3 =>
-                if(i_ech(23) = '1') then
+                if(i_ech(23) = '1' and i_en = '1') then
                     fsm_prochainEtat <= sta_cpt;
-                else
+                elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_3;
                 end if;
-                
+            
             when sta_cpt =>
-                if(i_ech(23) = '0') then
+                fsm_prochainEtat <= sta_cpt_en;
+                
+            when sta_cpt_en =>
+                if(i_ech(23) = '0' and i_en = '1') then
                     fsm_prochainEtat <= sta_4;
                     
-                else
+                elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_cpt;
 
                 end if;
+              
+             when sta_4 => fsm_prochainEtat <= sta_4_en;
                 
-             when sta_4 =>
-                if(i_ech(23) = '0') then
+             when sta_4_en =>
+                if(i_ech(23) = '0' and i_en = '1') then
                     fsm_prochainEtat <= sta_5;
-                else
+                elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_cpt;
                 end if;
+            
+            when sta_5 => fsm_prochainEtat <= sta_5_en;
                 
-            when sta_5 =>
-                if(i_ech(23) = '0') then
+            when sta_5_en =>
+                if(i_ech(23) = '0' and i_en = '1') then
                     fsm_prochainEtat <= sta_6;
-                else
+                elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_4;
                 end if;
             
-            when sta_6 =>
-                 if(i_ech(23) = '1') then
-                    fsm_prochainEtat <= sta_res;
-                 else
+            when sta_6 => fsm_prochainEtat <= sta_6_en;
+            
+            when sta_6_en =>
+                 if(i_ech(23) = '1' and i_en = '1') then
+                    fsm_prochainEtat <= sta_send;
+                 elsif(i_en = '1') then
                     fsm_prochainEtat <= sta_6;
                 end if;
                 
+            when sta_send => fsm_prochainEtat <= sta_res;
+               
             when sta_res =>
                 fsm_prochainEtat <= sta_cpt;
                 
@@ -190,57 +200,91 @@ begin
             when sta_init =>
             cpt_en <= '0';
             cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_1 =>
             cpt_en <= '0';
             cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_2 =>
             cpt_en <= '0';
             cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_3 =>
             cpt_en <= '0';
-            cpt_res <= '0';
+            cpt_res <= '1';
+            cpt_stb <= '0';
             
             when sta_cpt =>
             cpt_en <= '1';
             cpt_res <= '0';
+            cpt_stb <= '0';
+            
+            when sta_cpt_en =>
+            cpt_en <= '0';
+            cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_4 =>
             cpt_en <= '1';
             cpt_res <= '0';
+            cpt_stb <= '0';
+            
+            when sta_4_en =>
+            cpt_en <= '0';
+            cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_5 =>
             cpt_en <= '1';
             cpt_res <= '0';
+            cpt_stb <= '0';
+            
+            when sta_5_en =>
+            cpt_en <= '0';
+            cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_6 =>
             cpt_en <= '1';
             cpt_res <= '0';
+            cpt_stb <= '0';
+            
+            when sta_6_en =>
+            cpt_en <= '0';
+            cpt_res <= '0';
+            cpt_stb <= '0';
             
             when sta_res =>
-            cpt_en <= '1';
+            cpt_en <= '0';
             cpt_res <= '1';
+            cpt_stb <= '0';
+            
+            when sta_send =>
+            cpt_en <= '0';
+            cpt_res <= '0';
+            cpt_stb <= '1';
             
             when others =>
             cpt_en <= '0';
             cpt_res <= '0';
+            cpt_stb <= '0';
             
         end case;
       
     end process;
-
-    compteur: process(mySignal_re)
+    
+    param: Process(i_bclk)
     begin
-        if(cpt_en = '1' and cpt_res = '0') then
-            val_cpt <= val_cpt + 1;
-        end if;
+    if( rising_edge(i_bclk)) then
+        if(cpt_stb = '1') then
+        frquence <= val_cpt;
         
-        if(fsm_prochainEtat = sta_res) then
-            frquence <= val_cpt;
-            val_cpt <= "00000001";
-            end if;
-            
+        else frquence <= frquence;
+        end if;
+     end if;
     end process;
+    
 end Behavioral;

@@ -1,0 +1,63 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+| Date         : Mon Jan 31 16:21:29 2022
+| Host         : DESKTOP-00KO0KK running 64-bit major release  (build 9200)
+| Command      : report_drc -file circuit_tr_signal_drc_routed.rpt -pb circuit_tr_signal_drc_routed.pb -rpx circuit_tr_signal_drc_routed.rpx
+| Design       : circuit_tr_signal
+| Device       : xc7z010clg400-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 5
++----------+----------+---------------------------------+------------+
+| Rule     | Severity | Description                     | Violations |
++----------+----------+---------------------------------+------------+
+| PDRC-153 | Warning  | Gated clock check               | 3          |
+| RPBF-3   | Warning  | IO port buffering is incomplete | 1          |
+| ZPS7-1   | Warning  | PS7 block required              | 1          |
++----------+----------+---------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+PDRC-153#1 Warning
+Gated clock check  
+Net design_1_i/M1_decodeur_i2s/MEF_decodeur_i2s/U0/prochainEtat_reg[2]_i_2_n_0 is a gated clock net sourced by a combinational pin design_1_i/M1_decodeur_i2s/MEF_decodeur_i2s/U0/prochainEtat_reg[2]_i_2/O, cell design_1_i/M1_decodeur_i2s/MEF_decodeur_i2s/U0/prochainEtat_reg[2]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net design_1_i/M5_parametre_1/U0/fsm_prochainEtat__0 is a gated clock net sourced by a combinational pin design_1_i/M5_parametre_1/U0/FSM_onehot_fsm_prochainEtat_reg[13]_i_1/O, cell design_1_i/M5_parametre_1/U0/FSM_onehot_fsm_prochainEtat_reg[13]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#3 Warning
+Gated clock check  
+Net design_1_i/M8_commande/U0/fsm_prochainEtat_reg[2]_i_2_n_0 is a gated clock net sourced by a combinational pin design_1_i/M8_commande/U0/fsm_prochainEtat_reg[2]_i_2/O, cell design_1_i/M8_commande/U0/fsm_prochainEtat_reg[2]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+RPBF-3#1 Warning
+IO port buffering is incomplete  
+Device port io_ac_sda expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+ZPS7-1#1 Warning
+PS7 block required  
+The PS7 cell must be used in this Zynq design in order to enable correct default configuration.
+Related violations: <none>
+
+
